@@ -8,14 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var ideas = Idea.mockIdeas
+    @State private var showingAddIdea = false
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            Tab("All", systemImage: "list.bullet") {
+                AllIdeasView(ideas: $ideas, showingAddIdea: $showingAddIdea)
+            }
+
+            Tab("Completed", systemImage: "checkmark.circle.fill") {
+                CompletedIdeasView(ideas: $ideas)
+            }
+
+            Tab("Search", systemImage: "magnifyingglass", role: .search) {
+                SearchView(ideas: $ideas)
+            }
         }
-        .padding()
+        .sheet(isPresented: $showingAddIdea) {
+            AddIdeaSheet { newIdea in
+                ideas.insert(newIdea, at: 0)
+            }
+        }
     }
 }
 
