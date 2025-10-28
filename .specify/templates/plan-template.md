@@ -20,7 +20,7 @@
 **Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]  
 **Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]  
 **Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]  
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]  
+**Testing**: [e.g., Swift Testing, pytest, cargo test or NEEDS CLARIFICATION]  
 **Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
 **Project Type**: [single/web/mobile - determines source structure]  
 **Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]  
@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] 驗證主要使用流程是否在三個步驟內完成並於規格列出證據（原則一）。
+- [ ] 提供使用 Swift Testing 實作的單元測試與 UI 測試計畫，說明如何達到 85% 覆蓋率與必要自動化（原則二）。
+- [ ] 描述新的資料夾與檔案結構，確保符合模組化目錄紀律（原則三）。
+- [ ] 標示預期超過 200 行的檔案並提出拆分策略（原則四）。
+- [ ] 確認所有 UI 文案與註解將以正體中文交付，含必要在地化資源（原則五）。
 
 ## Project Structure
 

@@ -7,6 +7,8 @@
 
 ## User Scenarios & Testing *(mandatory)*
 
+> 所有敘述、驗收條件與測試說明必須使用正體中文；每個故事需對應至少一個以 Swift Testing 撰寫的自動化測試案例，並標示對應 UI 測試（若有）。
+
 <!--
   IMPORTANT: User stories should be PRIORITIZED as user journeys ordered by importance.
   Each user story/journey must be INDEPENDENTLY TESTABLE - meaning if you implement just ONE of them,
@@ -26,7 +28,7 @@
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
-**Independent Test**: [Describe how this can be tested independently - e.g., "Can be fully tested by [specific action] and delivers [specific value]"]
+**Independent Test**: [Describe how this can be tested independently，明確指出 Swift Testing 測試案例與對應 UI 測試檔案]
 
 **Acceptance Scenarios**:
 
@@ -41,7 +43,7 @@
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Describe how this can be tested independently，明確指出 Swift Testing 測試案例與對應 UI 測試檔案]
 
 **Acceptance Scenarios**:
 
@@ -55,7 +57,7 @@
 
 **Why this priority**: [Explain the value and why it has this priority level]
 
-**Independent Test**: [Describe how this can be tested independently]
+**Independent Test**: [Describe how this can be tested independently，明確指出 Swift Testing 測試案例與對應 UI 測試檔案]
 
 **Acceptance Scenarios**:
 
