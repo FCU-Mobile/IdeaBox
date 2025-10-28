@@ -14,35 +14,35 @@ Parallelization guidance: Within each phase, tasks marked [P] can proceed in par
 
 ## Phase 1 — Setup
 
-- [ ] T001 Create model file IdeaLink.swift at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Models/IdeaLink.swift
-- [ ] T002 Create model file IdeaBlacklist.swift at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Models/IdeaBlacklist.swift
-- [ ] T003 Create services folder (if missing) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/
-- [ ] T004 [P] Create SimilarityEngine.swift stub at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/SimilarityEngine.swift
-- [ ] T005 [P] Create EmbeddingsIndex.swift stub at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/EmbeddingsIndex.swift
-- [ ] T006 [P] Create LLMReranker.swift (no-op impl + protocol) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/LLMReranker.swift
-- [ ] T007 [P] Create RelatedPreferences.swift (N, τ storage) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedPreferences.swift
-- [ ] T008 Add feature flags (USE_COREML_EMBEDDINGS, USE_LLM_RERANKER) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/
-- [ ] T009 Update agent context for Copilot via script (optional) — document result in /Users/harryworld/Developer/harryworld/IdeaBox/specs/001-related-ideas-linking/quickstart.md
+- [X] T001 Create model file IdeaLink.swift at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Models/IdeaLink.swift
+- [X] T002 Create model file IdeaBlacklist.swift at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Models/IdeaBlacklist.swift
+- [X] T003 Create services folder (if missing) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/
+- [X] T004 [P] Create SimilarityEngine.swift stub at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/SimilarityEngine.swift
+- [X] T005 [P] Create EmbeddingsIndex.swift stub at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/EmbeddingsIndex.swift
+- [X] T006 [P] Create LLMReranker.swift (no-op impl + protocol) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/LLMReranker.swift
+- [X] T007 [P] Create RelatedPreferences.swift (N, τ storage) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedPreferences.swift
+- [X] T008 Add feature flags (USE_COREML_EMBEDDINGS, USE_LLM_RERANKER) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/
+- [X] T009 Update agent context for Copilot via script (optional) — document result in /Users/harryworld/Developer/harryworld/IdeaBox/specs/001-related-ideas-linking/quickstart.md
 
 ## Phase 2 — Foundational
 
-- [ ] T010 Implement baseline SimilarityEngine (deterministic BOW cosine) in /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/SimilarityEngine.swift
-- [ ] T011 Implement EmbeddingsIndex linear scan with normalized vectors in /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/EmbeddingsIndex.swift
-- [ ] T012 [P] Implement RelatedIdeasService (merge engine+index, threshold τ, Top‑N, blacklist, pinned separation) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedIdeasService.swift
-- [ ] T013 [P] Implement NoOp LLMReranker and a pluggable seam in RelatedIdeasService at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/LLMReranker.swift
-- [ ] T014 Add Swift Testing unit tests for engine and ranking at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBoxTests/SimilarityTests.swift
+- [X] T010 Implement baseline SimilarityEngine (deterministic BOW cosine) in /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/SimilarityEngine.swift
+- [X] T011 Implement EmbeddingsIndex linear scan with normalized vectors in /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/EmbeddingsIndex.swift
+- [X] T012 [P] Implement RelatedIdeasService (merge engine+index, threshold τ, Top‑N, blacklist, pinned separation) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedIdeasService.swift
+- [X] T013 [P] Implement NoOp LLMReranker and a pluggable seam in RelatedIdeasService at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/LLMReranker.swift
+- [X] T014 Add Swift Testing unit tests for engine and ranking at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBoxTests/SimilarityTests.swift
 
 ## Phase 3 — US1 (P1): 新增後顯示相關點子
 
 Goal: After saving a new idea, show related list (Top‑N ≥ τ). Tap to focus, view extended links, and return.
 Independent Test: UI flows from add → related list → focus → back.
 
-- [ ] T015 [US1] Wire recompute-on-save in AddIdea flow at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/AddIdeaSheet.swift
-- [ ] T016 [P] [US1] Create RelatedIdeasSection.swift using List/DisclosureGroup at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
-- [ ] T017 [P] [US1] Create IdeaFocusView.swift with Pinned + Suggested sections at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/IdeaFocusView.swift
-- [ ] T018 [US1] Integrate navigation from post-save to related list/focus view at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/ContentView.swift
-- [ ] T019 [US1] Empty state for no results (ContentUnavailableView) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
-- [ ] T020 [US1] Accessibility: labels/traits/actions for related items and sections at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
+- [X] T015 [US1] Wire recompute-on-save in AddIdea flow at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/AddIdeaSheet.swift
+- [X] T016 [P] [US1] Create RelatedIdeasSection.swift using List/DisclosureGroup at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
+- [X] T017 [P] [US1] Create IdeaFocusView.swift with Pinned + Suggested sections at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/IdeaFocusView.swift
+- [X] T018 [US1] Integrate navigation from post-save to related list/focus view at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/ContentView.swift
+- [X] T019 [US1] Empty state for no results (ContentUnavailableView) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
+- [X] T020 [US1] Accessibility: labels/traits/actions for related items and sections at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
 - [ ] T021 [US1] Add UI acceptance test: add → related list → focus → back at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBoxUITests/RelatedFlowUITests.swift
 
 ## Phase 4 — US2 (P2): 既有點子的相關清單與延伸探索
@@ -50,9 +50,9 @@ Independent Test: UI flows from add → related list → focus → back.
 Goal: From any existing idea, view related list and navigate to focus; continue exploration.
 Independent Test: Open existing idea → related list → other idea focus.
 
-- [ ] T022 [US2] Add entry point to related list from existing ideas (button/menu) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/IdeaRow.swift
-- [ ] T023 [P] [US2] Route to IdeaFocusView with correct model binding at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/AllIdeasView.swift
-- [ ] T024 [US2] Preserve navigation state on back at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/ContentView.swift
+- [X] T022 [US2] Add entry point to related list from existing ideas (button/menu) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/AllIdeasView.swift
+- [X] T023 [P] [US2] Route to IdeaFocusView with correct model binding at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/AllIdeasView.swift
+- [X] T024 [US2] Preserve navigation state on back at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/ContentView.swift
 
 ## Phase 5 — US3 (P3): 手動維護關聯（Pinned/Blacklist）
 
@@ -70,6 +70,12 @@ Independent Test: Add A↔B link → appears in both lists; remove A↔B → bot
 - [ ] T030 Performance: ensure work off main thread; verify p95 ≤ 1s at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedIdeasService.swift
 - [ ] T031 A11y verification for screen reader flows at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/IdeaFocusView.swift
 - [ ] T032 Add screenshots/video to PR for new UI at /Users/harryworld/Developer/harryworld/IdeaBox/
+- [ ] T033 Create SettingsView to adjust related.maxN (5–20) and thresholdTau (0.4–0.9) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/SettingsView.swift
+- [ ] T034 Wire SettingsView entry point (toolbar/menu) and present as sheet at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/ContentView.swift
+- [ ] T035 [P] Bind SettingsView to RelatedPreferences for live updates at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedPreferences.swift
+- [ ] T036 Create decision logging facility for accept/remove events (device-only) at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Services/RelatedDecisionLog.swift
+- [ ] T037 [P] [US3] Emit decision logs on manual add/remove actions at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/IdeaFocusView.swift
+- [ ] T038 Pinned UX polish: add visual badge and VoiceOver hint "Pinned link" at /Users/harryworld/Developer/harryworld/IdeaBox/IdeaBox/Views/RelatedIdeasSection.swift
 
 ---
 
@@ -78,18 +84,20 @@ Independent Test: Add A↔B link → appears in both lists; remove A↔B → bot
 - Foundational: T012 and T013 can run in parallel after T010/T011
 - US1: T016 and T017 can run in parallel after T015 (wiring save trigger)
 - US3: T026 and T027 can run in parallel
+- Polish: T033 and T036 can run in parallel; T035 and T037 can run in parallel after their respective dependencies
 
 ## Implementation strategy
 - MVP first: Deliver US1 end-to-end using the baseline engine and linear index.
 - Incremental: Add US2 entry points; then US3 manual management.
 - Optional: Swap in Core ML embeddings and (if available) local Foundation Models reranker behind flags.
+- Remediation: Add Settings UI for N/τ (FR-012/FR-015), decision logging (FR-010), pinned UX polish.
 
 ## Format validation
 - All tasks follow the checklist format: `- [ ] T### [P]? [US?] Description with file path`
 
 ## Summary report
 - Output: /Users/harryworld/Developer/harryworld/IdeaBox/specs/001-related-ideas-linking/tasks.md
-- Total tasks: 32
-- Per user story: US1 = 7 (T015–T021), US2 = 3 (T022–T024), US3 = 4 (T025–T028)
-- Parallel opportunities: Setup (4), Foundational (2), US1 (2), US3 (2)
+- Total tasks: 38
+- Per user story: US1 = 7 (T015–T021), US2 = 3 (T022–T024), US3 = 5 (T025–T028, T037)
+- Parallel opportunities: Setup (4), Foundational (2), US1 (2), US3 (2), Polish (4)
 - MVP scope: Phase 1–2 + US1
