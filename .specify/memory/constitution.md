@@ -1,50 +1,105 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+同步影響報告（Sync Impact Report）
 
-## Core Principles
+- 版本變更：N/A → 1.0.0
+- 調整之原則：N/A（首次採用）
+- 新增章節：
+  - 使用者體驗與無障礙標準
+  - 開發流程與品質關卡
+  - 附加約束與效能標準
+- 移除章節：無
+- 需同步之模板：
+  - .specify/templates/plan-template.md ✅ 已更新
+  - .specify/templates/spec-template.md ✅ 已更新
+  - .specify/templates/tasks-template.md ✅ 已更新
+  - .specify/templates/commands/* ⚠ 無此資料夾
+  - README/docs ⚠ 將在建立後對齊
+- 待辦事項：無
+-->
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+# IdeaBox 憲章
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+## 核心原則
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### I. 代碼品質與可維護性（不可協商）
+代碼庫必須以清晰、安全、易於修改為首要原則。
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+- 編譯警告一律視為錯誤；主分支不得存在任何警告。
+- 偏好小而純粹的函式與單一職責型別；移除不再使用之代碼。
+- 遵循 Swift API 設計準則；在可行情況下偏好值語義與不可變設計。
+- 公開型別需有簡明文件註解，清楚描述意圖與契約。
+- 主分支不得殘留 TODO/FIXME；改以議題追蹤（issue）管理。
+- 所有變更須由至少一位維護者審查。
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+理由：高品質代碼可降低缺陷、加速交付，並降低新人上手成本。
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### II. 現代化 iOS API 與並行
+採用現代、穩定之平台 API 與模式，確保長期維護性與效能。
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- 優先使用 SwiftUI 與 NavigationStack 及現代修飾器。
+- 使用 Swift Observation（如 @Observable）進行狀態管理，取代舊式模式。
+- 使用 Swift Concurrency（async/await、Task、TaskGroup）取代回呼式寫法；避免阻塞主執行緒。
+- 新代碼不得引入已淘汰 API（如 NavigationView）；修改舊模組時優先順帶遷移。
+- 以小型協定封裝副作用與外部依賴，利於測試與替換。
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+理由：現代 API 提升效能、安全性與可近用性（a11y），並提升開發效率。
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### III. 測試標準
+以測試保護核心行為與主要使用流程。
 
-## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+- 單元測試必須涵蓋核心模型、視圖邏輯與重要工具。
+- 介面（UI）測試必須涵蓋主要流程：新增點子、切換完成狀態、刪除、搜尋，以及關鍵的空/錯誤狀態。
+- 測試須可重現且穩定，可於本機與 CI 執行；鼓勵 Red-Green-Refactor。
+- 關鍵模組的基本覆蓋率目標 ≥ 70%，並隨時間提升。
+- 規格文件中的每個 P1 使用者故事，至少需對應一個可執行的驗收測試（XCTest）。
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+理由：可靠的測試集合可支撐重構並加速迭代。
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### IV. 簡單且內聚的結構
+維持專案最小而清晰的結構，易於瀏覽與維護。
+
+- 偏好扁平且以功能內聚之結構（如 Models/、Views/）。
+- 原則上一個檔案一個主要型別；避免超大檔案（>500 行）。
+- 僅在複雜度合理時才引入額外架構（如協調器）；並記錄決策理由。
+- 優先組合（composition）而非繼承；盡量減少全域狀態。
+
+理由：簡單結構能降低心智負擔，讓修改更安全、更快速。
+
+### V. 使用者體驗與無障礙（UX & A11y）
+使用者體驗為第一級需求。
+
+- 支援 Dynamic Type；在所有字體尺寸下皆可閱讀。
+- 提供有意義的無障礙標籤、特徵與操作；核心流程可良好使用 VoiceOver。
+- 提供清楚的空狀態（如 ContentUnavailableView）與驗證回饋；避免「靜默失敗」。
+- 保持互動效能 60 fps；避免在主執行緒進行昂貴運算。
+- 使用 SF Symbols 與系統元件以維持一致性；遵循安全邊界（safe area）與平台慣例。
+
+理由：精緻且可近用的體驗服務所有使用者，並降低支援成本。
+
+## 附加約束與效能標準
+
+- 隱私與資料：僅儲存必要資訊。若日後導入儲存或網路功能，需使用安全通訊（HTTPS/TLS），避免不必要的敏感資料，並記錄保存政策。
+- 效能預算：初始載入 < 300ms（以現代模擬器為準）；清單滾動維持 60 fps；避免不必要的重算與畫面重繪。
+- 錯誤處理：在合適情境下提供明確的使用者訊息；開發期間保留必要的診斷紀錄以利除錯。
+
+## 開發流程與品質關卡
+
+- 分支：功能分支命名 `<issue-id-or-topic>-short-desc`。
+- Pull Request：若涉及 UI，需附截圖/錄影，並列出受影響的使用者故事。
+- 合併前品質關卡：
+  - 本機與 CI 測試全數通過。
+  - 不得引入新警告；若有靜態分析，須保持乾淨。
+  - PR 描述需適當回應本憲章相關項目（如 UX/a11y 說明）。
+- 發佈：App 採用語義化版本（SemVer），記錄重大變更。
+
+## 治理（Governance）
+本憲章優先於臨時做法，提供不可協商的防護欄，維持專案健康。
+
+- 修訂流程：以 PR 提案，更新本檔案並附影響/遷移說明與理由；需至少一位維護者核可。
+- 版本政策（本憲章）：採語義化版本。
+  - MAJOR：不相容治理變更或移除/重新定義原則。
+  - MINOR：新增原則或實質擴充指引。
+  - PATCH：釐清文字、修正錯字或非語義性微調。
+- 遵循稽核：專案計畫（plan）必須包含「Constitution Check」；審查者於 PR 中確認遵循情況；每季或重大發佈前進行一次定期稽核。
+
+**Version**: 1.0.0 | **Ratified**: 2025-10-28 | **Last Amended**: 2025-10-28

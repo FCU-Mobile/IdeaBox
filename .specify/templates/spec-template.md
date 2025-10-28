@@ -18,6 +18,9 @@
   - Tested independently
   - Deployed independently
   - Demonstrated to users independently
+
+  依據專案憲章，所有 P1 使用者故事必須至少包含一個可執行的驗收測試，
+  並能以 XCTest（單元或 UI）實作。下列驗收情境需能對應至這些測試。
 -->
 
 ### User Story 1 - [Brief Title] (Priority: P1)

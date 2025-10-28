@@ -31,7 +31,13 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+請確認本計畫符合憲章之要求：
+
+- 代碼品質：元件小而單一職責；不得新增任何編譯警告；公開 API 有文件；增加複雜度的決策需有理由。
+- 現代 API：使用 SwiftUI 與 NavigationStack；採用 Observation 模型；非同步使用 Swift Concurrency；不得引入廢棄 API。
+- 測試：為核心邏輯與主要使用流程定義單元/介面測試；每個 P1 故事至少一個可執行的驗收測試（XCTest）。
+- 結構簡單：維持或改善現有最小結構；新增層/模式需有清楚理由。
+- UX 與無障礙：考量 Dynamic Type、a11y 標籤/特徵/操作、空狀態、與效能預算。
 
 ## Project Structure
 
