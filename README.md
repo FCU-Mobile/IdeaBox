@@ -37,9 +37,39 @@ Use local notifications without maintaining ReminderSchedule table
 Remove sortGroupToken and syncState related properties as SwiftData will take care of them
 ```
 
-### 4. 執行 `/speckit.tasks` 產出「雲端同步與排序體驗」的分階段任務清單，涵蓋同步、排序、提醒三大使用者故事與測試計畫，輸出至 `specs/001-sync-ideas-cloud/tasks.md`。
-
+### 4. 執行 `/speckit.tasks` 產出「雲端同步與排序體驗」的分階段任務清單，涵蓋同步、排序、
+提醒三大使用者故事與測試計畫，輸出至 `specs/001-sync-ideas-cloud/tasks.md`。              
 ```
 /speckit.tasks
-Follow instructions in speckit.tasks.prompt.md
 ```
+
+### 5. 執行 `/speckit.implement` 實作 SwiftData 本地持久化支援 (Category 1: T101-T108)
+```
+/speckit.implement
+Keep the existing views as much as possible
+Add SwiftData support to the model
+```
+
+**完成項目**:
+- ✅ T101: 將 `Idea` struct 轉換為 SwiftData `@Model` 類別
+  - 新增欄位：`detail`, `createdAt`, `updatedAt`, `customOrderIndex`, `lastSyncedAt`, `lastSyncError`
+  - 保留 `isCompleted` 欄位以維持現有功能
+  - 使用 `@Attribute(.unique)` 標記 `id` 欄位
+- ✅ T102: 更新 `IdeaBoxApp.swift` 建立本地 `ModelContainer`
+- ✅ T103: 調整所有視圖使用 SwiftData `@Query` 與 `ModelContext`
+  - `AllIdeasView`: 使用 `@Query` 按建立日期排序
+  - `CompletedIdeasView`: 使用 `@Query` 與 `#Predicate` 篩選已完成想法
+  - `SearchView`: 使用 `@Query` 查詢所有想法並客戶端篩選
+- ✅ T104: 將 mock 資料遷移至 `IdeaBoxTests/Fixtures/MockIdea.swift`
+- ✅ T107: 更新 `AddIdeaSheet` 使用 `ModelContext` 儲存新想法
+- ✅ T108: 更新 `IdeaRow` 與 `SearchView` 顯示與查詢 SwiftData 模型
+  - 使用 `@Bindable` 允許直接修改 SwiftData 物件
+  - 切換完成狀態時自動更新 `updatedAt` 時間戳
+
+**技術重點**:
+- 從 struct 轉換為 `@Model` class 以支援 SwiftData 持久化
+- 使用 `@Query` 與 `@Environment(\.modelContext)` 取代 `@State` 陣列
+- 保持現有視圖結構與使用者體驗不變
+- 欄位名稱從 `description` 改為 `detail` 以符合資料模型規格
+
+**下一步**: 實作測試 (T105-T106, T109) 並整合 iCloud 同步 (Category 2)

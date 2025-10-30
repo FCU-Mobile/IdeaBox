@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AddIdeaSheet: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
     @State private var title = ""
-    @State private var description = ""
-    let onSave: (Idea) -> Void
+    @State private var detail = ""
 
     var body: some View {
         NavigationStack {
@@ -20,7 +21,7 @@ struct AddIdeaSheet: View {
                     TextField("Title", text: $title)
                         .font(.headline)
 
-                    TextField("Description", text: $description, axis: .vertical)
+                    TextField("Description", text: $detail, axis: .vertical)
                         .lineLimit(3...6)
                         .font(.body)
                 }
@@ -36,8 +37,8 @@ struct AddIdeaSheet: View {
 
                 ToolbarItem(placement: .confirmationAction) {
                     Button("Save") {
-                        let newIdea = Idea(title: title, description: description)
-                        onSave(newIdea)
+                        let newIdea = Idea(title: title, detail: detail.isEmpty ? nil : detail)
+                        modelContext.insert(newIdea)
                         dismiss()
                     }
                     .disabled(title.isEmpty)
@@ -48,5 +49,6 @@ struct AddIdeaSheet: View {
 }
 
 #Preview {
-    AddIdeaSheet { _ in }
+    AddIdeaSheet()
+        .modelContainer(for: Idea.self, inMemory: true)
 }

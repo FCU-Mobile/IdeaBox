@@ -17,10 +17,10 @@
 
 ### Foundational Tasks
 
-- [ ] T101 [P] 將 `IdeaBox/Models/Idea.swift` 轉換為 SwiftData `@Model`，按照 `data-model.md` 增加 `detail`, `createdAt`, `updatedAt`, `customOrderIndex`, `lastSyncedAt`, `lastSyncError` 欄位並移除舊的 `isCompleted` 狀態；加入 UUID 主鍵。
-- [ ] T102 [P] 更新 `IdeaBox/IdeaBoxApp.swift` 以建立本地 `ModelContainer`（暫時不指向 CloudKit），並透過 `@Environment(\.modelContext)` 提供給整體 App。
-- [ ] T103 [P] 調整 `IdeaBox/ContentView.swift` 與 `IdeaBox/Views/AllIdeasView.swift` 使用 SwiftData 的 `@Query` 與 `ModelContext` 讀寫 `Idea`，替換原本的本地陣列狀態。
-- [ ] T104 [P] 移除 `IdeaBox/Models/Idea.swift` 中的 mock 資料或遷移至測試檔案 `IdeaBoxTests/Fixtures/MockIdea.swift`。
+- [X] T101 [P] 將 `IdeaBox/Models/Idea.swift` 轉換為 SwiftData `@Model`，按照 `data-model.md` 增加 `detail`, `createdAt`, `updatedAt`, `customOrderIndex`, `lastSyncedAt`, `lastSyncError` 欄位並移除舊的 `isCompleted` 狀態；加入 UUID 主鍵。
+- [X] T102 [P] 更新 `IdeaBox/IdeaBoxApp.swift` 以建立本地 `ModelContainer`（暫時不指向 CloudKit），並透過 `@Environment(\.modelContext)` 提供給整體 App。
+- [X] T103 [P] 調整 `IdeaBox/ContentView.swift` 與 `IdeaBox/Views/AllIdeasView.swift` 使用 SwiftData 的 `@Query` 與 `ModelContext` 讀寫 `Idea`，替換原本的本地陣列狀態。
+- [X] T104 [P] 移除 `IdeaBox/Models/Idea.swift` 中的 mock 資料或遷移至測試檔案 `IdeaBoxTests/Fixtures/MockIdea.swift`。
 
 ### Testing
 
@@ -29,8 +29,8 @@
 
 ### Integration
 
-- [ ] T107 更新 `IdeaBox/Views/AddIdeaSheet.swift` 以使用 `ModelContext` 儲存新想法，確保正確寫入本地資料庫。
-- [ ] T108 確認 `IdeaBox/Views/IdeaRow.swift` 與 `IdeaBox/Views/SearchView.swift` 可正確顯示與查詢 SwiftData 模型。
+- [X] T107 更新 `IdeaBox/Views/AddIdeaSheet.swift` 以使用 `ModelContext` 儲存新想法，確保正確寫入本地資料庫。
+- [X] T108 確認 `IdeaBox/Views/IdeaRow.swift` 與 `IdeaBox/Views/SearchView.swift` 可正確顯示與查詢 SwiftData 模型。
 - [ ] T109 執行本地測試，驗證 App 啟動、新增、編輯、刪除、查詢想法的完整流程。
 
 ---

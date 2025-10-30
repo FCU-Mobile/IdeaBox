@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SearchView: View {
-    @Binding var ideas: [Idea]
+    @Environment(\.modelContext) private var modelContext
+    @Query private var allIdeas: [Idea]
     @State private var searchText = ""
 
     var filteredIdeas: [Idea] {
         if searchText.isEmpty {
             return []
         }
-        return ideas.filter { idea in
+        return allIdeas.filter { idea in
             idea.title.localizedCaseInsensitiveContains(searchText) ||
-            idea.description.localizedCaseInsensitiveContains(searchText)
+            (idea.detail ?? "").localizedCaseInsensitiveContains(searchText)
         }
     }
 
@@ -35,9 +37,7 @@ struct SearchView: View {
                 } else {
                     List {
                         ForEach(filteredIdeas) { idea in
-                            IdeaRow(idea: idea) {
-                                toggleCompletion(for: idea)
-                            }
+                            IdeaRow(idea: idea)
                         }
                     }
                 }
@@ -46,16 +46,9 @@ struct SearchView: View {
             .searchable(text: $searchText, prompt: "Search ideas...")
         }
     }
-
-    private func toggleCompletion(for idea: Idea) {
-        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
-            ideas[index].isCompleted.toggle()
-        }
-    }
 }
 
 #Preview {
-    @Previewable @State var ideas = Idea.mockIdeas
-
-    SearchView(ideas: $ideas)
+    SearchView()
+        .modelContainer(for: Idea.self, inMemory: true)
 }
