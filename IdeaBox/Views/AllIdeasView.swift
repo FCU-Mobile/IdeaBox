@@ -11,21 +11,20 @@ import SwiftData
 struct AllIdeasView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Idea.createdAt, order: .reverse) private var ideas: [Idea]
-    @Binding var showingAddIdea: Bool
-    @Binding var ideaToEdit: Idea?
+    @Binding var sheetPresentation: SheetPresentation?
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(ideas) { idea in
-                    IdeaRow(idea: idea, onEdit: { ideaToEdit = $0 })
+                    IdeaRow(idea: idea, onEdit: { sheetPresentation = .edit($0) })
                 }
                 .onDelete(perform: deleteIdeas)
             }
             .navigationTitle("All Ideas")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
-                    Button(action: { showingAddIdea = true }) {
+                    Button(action: { sheetPresentation = .addNew }) {
                         Image(systemName: "plus")
                     }
                 }
@@ -41,9 +40,8 @@ struct AllIdeasView: View {
 }
 
 #Preview {
-    @Previewable @State var showingAdd = false
-    @Previewable @State var ideaToEdit: Idea?
+    @Previewable @State var sheetPresentation: SheetPresentation?
 
-    AllIdeasView(showingAddIdea: $showingAdd, ideaToEdit: $ideaToEdit)
+    AllIdeasView(sheetPresentation: $sheetPresentation)
         .modelContainer(for: Idea.self, inMemory: true)
 }

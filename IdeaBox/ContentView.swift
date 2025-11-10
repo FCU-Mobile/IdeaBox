@@ -7,31 +7,47 @@
 
 import SwiftUI
 import SwiftData
+import SwiftUINavigation
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var showingAddIdea = false
-    @State private var ideaToEdit: Idea?
+    @State private var sheetPresentation: SheetPresentation?
 
     var body: some View {
         TabView {
             Tab("All", systemImage: "list.bullet") {
-                AllIdeasView(showingAddIdea: $showingAddIdea, ideaToEdit: $ideaToEdit)
+                AllIdeasView(sheetPresentation: $sheetPresentation)
             }
 
             Tab("Completed", systemImage: "checkmark.circle.fill") {
-                CompletedIdeasView(ideaToEdit: $ideaToEdit)
+                CompletedIdeasView(sheetPresentation: $sheetPresentation)
             }
 
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                SearchView(ideaToEdit: $ideaToEdit)
+                SearchView(sheetPresentation: $sheetPresentation)
             }
         }
-        .sheet(isPresented: $showingAddIdea) {
-            AddIdeaSheet(ideaToEdit: nil)
+        .sheet(item: $sheetPresentation) { presentation in
+            switch presentation {
+            case .addNew:
+                AddIdeaSheet(ideaToEdit: nil)
+            case .edit(let idea):
+                AddIdeaSheet(ideaToEdit: idea)
+            }
         }
-        .sheet(item: $ideaToEdit) { idea in
-            AddIdeaSheet(ideaToEdit: idea)
+    }
+}
+
+enum SheetPresentation: Identifiable {
+    case addNew
+    case edit(Idea)
+
+    var id: String {
+        switch self {
+        case .addNew:
+            return "addNew"
+        case .edit(let idea):
+            return "edit-\(idea.id)"
         }
     }
 }

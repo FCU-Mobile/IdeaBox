@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		06D3BFB92EC2191200D0574B /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 06D3BFB82EC2191200D0574B /* SwiftUINavigation */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		061A80E02E8D781800063A2A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06D3BFB92EC2191200D0574B /* SwiftUINavigation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +130,7 @@
 			);
 			name = IdeaBox;
 			packageProductDependencies = (
+				06D3BFB82EC2191200D0574B /* SwiftUINavigation */,
 			);
 			productName = IdeaBox;
 			productReference = 061A80D22E8D781300063A2A /* IdeaBox.app */;
@@ -208,6 +214,9 @@
 			);
 			mainGroup = 061A80C92E8D781300063A2A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				06D3BFB72EC2191200D0574B /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 061A80D32E8D781300063A2A /* Products */;
 			projectDirPath = "";
@@ -595,6 +604,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		06D3BFB72EC2191200D0574B /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		06D3BFB82EC2191200D0574B /* SwiftUINavigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06D3BFB72EC2191200D0574B /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			productName = SwiftUINavigation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 061A80CA2E8D781300063A2A /* Project object */;
 }
