@@ -5,9 +5,13 @@
 	<key>aps-environment</key>
 	<string>development</string>
 	<key>com.apple.developer.icloud-container-identifiers</key>
+<<<<<<< HEAD
 	<array>
 		<string>iCloud.com.buildwithharry.IdeaBox</string>
 	</array>
+=======
+	<array/>
+>>>>>>> 99b0e519b73ad41bb967187e6d302a261bd95f4d
 	<key>com.apple.developer.icloud-services</key>
 	<array>
 		<string>CloudKit</string>
