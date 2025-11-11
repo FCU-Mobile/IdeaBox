@@ -8,57 +8,17 @@
 import Foundation
 import SwiftData
 
-struct Idea {
-    let id: UUID
+@Model
+class Idea {
     var title: String
-    var description: String
+    var details: String
     var isCompleted: Bool
+    var sortOrder: Int
 
-    init(
-        id: UUID = UUID(),
-        title: String,
-        description: String,
-        isCompleted: Bool = false
-    ) {
-        self.id = id
+    init(title: String, details: String, isCompleted: Bool = false, sortOrder: Int) {
         self.title = title
-        self.description = description
+        self.details = details
         self.isCompleted = isCompleted
+        self.sortOrder = sortOrder
     }
-}
-
-// MARK: - Mock Data
-extension Idea {
-    static let mockIdeas: [Idea] = [
-        Idea(
-            title: "Build IdeaBox App",
-            description: "Create a native iOS app for managing ideas with Liquid Glass materials"
-        ),
-        Idea(
-            title: "Learn SwiftUI Animations",
-            description: "Master smooth transitions and interactive animations in SwiftUI"
-        ),
-        Idea(
-            title: "Write Technical Blog",
-            description: "Share insights about iOS development and best practices",
-            isCompleted: true
-        ),
-        Idea(
-            title: "Redesign Portfolio",
-            description: "Update personal website with latest projects and modern design"
-        ),
-        Idea(
-            title: "Contribute to Open Source",
-            description: "Find interesting Swift packages to contribute to"
-        ),
-        Idea(
-            title: "Study Design Patterns",
-            description: "Deep dive into MVVM, Coordinator, and other architectural patterns",
-            isCompleted: true
-        ),
-        Idea(
-            title: "Attend WWDC Session",
-            description: "Watch sessions about iOS 26 features and Liquid Glass materials"
-        )
-    ]
 }

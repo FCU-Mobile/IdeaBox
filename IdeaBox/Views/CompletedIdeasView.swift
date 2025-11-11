@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct CompletedIdeasView: View {
-    @Binding var ideas: [Idea]
+    @Query var ideas: [Idea]
+    @Environment(\.modelContext) private var modelContext
 
     var completedIdeas: [Idea] {
         ideas.filter { $0.isCompleted }
@@ -39,19 +41,17 @@ struct CompletedIdeasView: View {
     }
 
     private func toggleCompletion(for idea: Idea) {
-        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
-            ideas[index].isCompleted.toggle()
-        }
+        idea.isCompleted.toggle()
     }
 
     private func deleteIdeas(at offsets: IndexSet) {
-        let idsToDelete = offsets.map { completedIdeas[$0].id }
-        ideas.removeAll { idea in idsToDelete.contains(idea.id) }
+        for index in offsets {
+            modelContext.delete(completedIdeas[index])
+        }
     }
 }
 
 #Preview {
-    @Previewable @State var ideas = Idea.mockIdeas
-
-    CompletedIdeasView(ideas: $ideas)
+    CompletedIdeasView()
+        .modelContainer(for: Idea.self, inMemory: true)
 }

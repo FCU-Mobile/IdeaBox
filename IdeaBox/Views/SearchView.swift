@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct SearchView: View {
-    @Binding var ideas: [Idea]
+    @Query var ideas: [Idea]
     @State private var searchText = ""
 
     var filteredIdeas: [Idea] {
@@ -17,7 +18,7 @@ struct SearchView: View {
         }
         return ideas.filter { idea in
             idea.title.localizedCaseInsensitiveContains(searchText) ||
-            idea.description.localizedCaseInsensitiveContains(searchText)
+            idea.details.localizedCaseInsensitiveContains(searchText)
         }
     }
 
@@ -55,7 +56,6 @@ struct SearchView: View {
 }
 
 #Preview {
-    @Previewable @State var ideas = Idea.mockIdeas
-
-    SearchView(ideas: $ideas)
+    SearchView()
+        .modelContainer(for: Idea.self, inMemory: true)
 }

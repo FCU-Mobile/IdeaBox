@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct AllIdeasView: View {
-    @Binding var ideas: [Idea]
+    @Query var ideas: [Idea]
     @Binding var showingAddIdea: Bool
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         NavigationStack {
@@ -33,19 +35,18 @@ struct AllIdeasView: View {
     }
 
     private func toggleCompletion(for idea: Idea) {
-        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
-            ideas[index].isCompleted.toggle()
-        }
+        idea.isCompleted.toggle()
     }
 
     private func deleteIdeas(at offsets: IndexSet) {
-        ideas.remove(atOffsets: offsets)
+        for index in offsets {
+            modelContext.delete(ideas[index])
+        }
     }
 }
 
 #Preview {
-    @Previewable @State var ideas = Idea.mockIdeas
-    @Previewable @State var showingAdd = false
-
-    AllIdeasView(ideas: $ideas, showingAddIdea: $showingAdd)
+    @State var showingAdd = false
+    AllIdeasView(showingAddIdea: $showingAdd)
+        .modelContainer(for: Idea.self, inMemory: true)
 }
