@@ -16,9 +16,7 @@ final class Idea {
     var isCompleted: Bool
     var createdAt: Date
     var updatedAt: Date
-    var customOrderIndex: Double?
-    var lastSyncedAt: Date?
-    var lastSyncError: String?
+    var sortOrder: Double?
     
     init(
         id: UUID = UUID(),
@@ -27,9 +25,7 @@ final class Idea {
         isCompleted: Bool = false,
         createdAt: Date = Date(),
         updatedAt: Date = Date(),
-        customOrderIndex: Double? = nil,
-        lastSyncedAt: Date? = nil,
-        lastSyncError: String? = nil
+        sortOrder: Double? = nil,
     ) {
         self.id = id
         self.title = title
@@ -37,8 +33,6 @@ final class Idea {
         self.isCompleted = isCompleted
         self.createdAt = createdAt
         self.updatedAt = updatedAt
-        self.customOrderIndex = customOrderIndex
-        self.lastSyncedAt = lastSyncedAt
-        self.lastSyncError = lastSyncError
+        self.sortOrder = sortOrder
     }
 }
