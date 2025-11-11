@@ -6,14 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct IdeaRow: View {
-    let idea: Idea
-    let onToggle: () -> Void
+    @Bindable var idea: Idea
 
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            Button(action: onToggle) {
+            Button(action: { toggleCompletion() }) {
                 Image(systemName: idea.isCompleted ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
                     .foregroundStyle(idea.isCompleted ? .green : .gray)
@@ -26,8 +26,8 @@ struct IdeaRow: View {
                     .foregroundStyle(idea.isCompleted ? .secondary : .primary)
                     .strikethrough(idea.isCompleted)
 
-                if !idea.description.isEmpty {
-                    Text(idea.description)
+                if let detail = idea.detail, !detail.isEmpty {
+                    Text(detail)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
@@ -36,11 +36,26 @@ struct IdeaRow: View {
         }
         .padding(.vertical, 4)
     }
+    
+    private func toggleCompletion() {
+        idea.isCompleted.toggle()
+        idea.updatedAt = Date()
+    }
 }
 
 #Preview {
-    List {
-        IdeaRow(idea: Idea.mockIdeas[0]) { }
-        IdeaRow(idea: Idea.mockIdeas[2]) { }
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Idea.self, configurations: config)
+    
+    let idea1 = Idea(title: "Build IdeaBox App", detail: "Create a native iOS app")
+    let idea2 = Idea(title: "Learn SwiftUI", detail: "Master animations", isCompleted: true)
+    
+    container.mainContext.insert(idea1)
+    container.mainContext.insert(idea2)
+    
+    return List {
+        IdeaRow(idea: idea1)
+        IdeaRow(idea: idea2)
     }
+    .modelContainer(container)
 }
