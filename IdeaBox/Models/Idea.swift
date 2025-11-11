@@ -6,14 +6,20 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Idea: Identifiable {
+struct Idea {
     let id: UUID
     var title: String
     var description: String
     var isCompleted: Bool
 
-    init(id: UUID = UUID(), title: String, description: String, isCompleted: Bool = false) {
+    init(
+        id: UUID = UUID(),
+        title: String,
+        description: String,
+        isCompleted: Bool = false
+    ) {
         self.id = id
         self.title = title
         self.description = description
