@@ -12,7 +12,7 @@ struct CompletedIdeasView: View {
     @Environment(\.modelContext) private var modelContext
     @Query(filter: #Predicate<Idea> { $0.isCompleted == true }, sort: \Idea.updatedAt, order: .reverse)
     private var completedIdeas: [Idea]
-    @Binding var sheetPresentation: SheetPresentation?
+    @Binding var destination: Destination?
 
     var body: some View {
         NavigationStack {
@@ -26,7 +26,7 @@ struct CompletedIdeasView: View {
                 } else {
                     List {
                         ForEach(completedIdeas) { idea in
-                            IdeaRow(idea: idea, onEdit: { sheetPresentation = .edit($0) })
+                            IdeaRow(idea: idea, onEdit: { destination = .edit($0) })
                         }
                         .onDelete(perform: deleteIdeas)
                     }
@@ -44,8 +44,8 @@ struct CompletedIdeasView: View {
 }
 
 #Preview {
-    @Previewable @State var sheetPresentation: SheetPresentation?
+    @Previewable @State var destination: Destination?
 
-    CompletedIdeasView(sheetPresentation: $sheetPresentation)
+    CompletedIdeasView(destination: $destination)
         .modelContainer(for: Idea.self, inMemory: true)
 }

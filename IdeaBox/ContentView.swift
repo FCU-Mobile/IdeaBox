@@ -11,35 +11,34 @@ import SwiftUINavigation
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @State private var sheetPresentation: SheetPresentation?
+    @State private var destination: Destination?
 
     var body: some View {
         TabView {
             Tab("All", systemImage: "list.bullet") {
-                AllIdeasView(sheetPresentation: $sheetPresentation)
+                AllIdeasView(destination: $destination)
             }
 
             Tab("Completed", systemImage: "checkmark.circle.fill") {
-                CompletedIdeasView(sheetPresentation: $sheetPresentation)
+                CompletedIdeasView(destination: $destination)
             }
 
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                SearchView(sheetPresentation: $sheetPresentation)
+                SearchView(destination: $destination)
             }
         }
-        .sheet(item: $sheetPresentation) { presentation in
-            switch presentation {
-            case .addNew:
-                AddIdeaSheet(ideaToEdit: nil)
-            case .edit(let idea):
-                AddIdeaSheet(ideaToEdit: idea)
-            }
+        .sheet(item: $destination.addNew) { _ in
+            AddIdeaSheet(ideaToEdit: nil)
+        }
+        .sheet(item: $destination.edit) { idea in
+            AddIdeaSheet(ideaToEdit: idea)
         }
     }
 }
 
-enum SheetPresentation: Identifiable {
-    case addNew
+@CasePathable
+enum Destination: Identifiable {
+    case addNew(Idea)
     case edit(Idea)
 
     var id: String {
