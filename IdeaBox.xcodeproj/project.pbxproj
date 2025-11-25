@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		06D3BFB92EC2191200D0574B /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 06D3BFB82EC2191200D0574B /* SwiftUINavigation */; };
+		062292442ED52206004637D1 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 062292432ED52206004637D1 /* SwiftUINavigation */; };
+		0622926F2ED522D7004637D1 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = 0622926E2ED522D7004637D1 /* Dependencies */; };
+		062292722ED522ED004637D1 /* SwiftDate in Frameworks */ = {isa = PBXBuildFile; productRef = 062292712ED522ED004637D1 /* SwiftDate */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				06D3BFB92EC2191200D0574B /* SwiftUINavigation in Frameworks */,
+				062292442ED52206004637D1 /* SwiftUINavigation in Frameworks */,
+				0622926F2ED522D7004637D1 /* Dependencies in Frameworks */,
+				062292722ED522ED004637D1 /* SwiftDate in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +134,9 @@
 			);
 			name = IdeaBox;
 			packageProductDependencies = (
-				06D3BFB82EC2191200D0574B /* SwiftUINavigation */,
+				062292432ED52206004637D1 /* SwiftUINavigation */,
+				0622926E2ED522D7004637D1 /* Dependencies */,
+				062292712ED522ED004637D1 /* SwiftDate */,
 			);
 			productName = IdeaBox;
 			productReference = 061A80D22E8D781300063A2A /* IdeaBox.app */;
@@ -215,7 +221,9 @@
 			mainGroup = 061A80C92E8D781300063A2A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				06D3BFB72EC2191200D0574B /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
+				062292422ED52206004637D1 /* XCRemoteSwiftPackageReference "swiftui-navigation" */,
+				0622926D2ED522D7004637D1 /* XCRemoteSwiftPackageReference "swift-dependencies" */,
+				062292702ED522ED004637D1 /* XCRemoteSwiftPackageReference "SwiftDate" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 061A80D32E8D781300063A2A /* Products */;
@@ -608,7 +616,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		06D3BFB72EC2191200D0574B /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
+		062292422ED52206004637D1 /* XCRemoteSwiftPackageReference "swiftui-navigation" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swiftui-navigation.git";
 			requirement = {
@@ -616,13 +624,39 @@
 				minimumVersion = 1.5.5;
 			};
 		};
+		0622926D2ED522D7004637D1 /* XCRemoteSwiftPackageReference "swift-dependencies" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-dependencies.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.0;
+			};
+		};
+		062292702ED522ED004637D1 /* XCRemoteSwiftPackageReference "SwiftDate" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/malcommac/SwiftDate";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		06D3BFB82EC2191200D0574B /* SwiftUINavigation */ = {
+		062292432ED52206004637D1 /* SwiftUINavigation */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 06D3BFB72EC2191200D0574B /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
+			package = 062292422ED52206004637D1 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
 			productName = SwiftUINavigation;
+		};
+		0622926E2ED522D7004637D1 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0622926D2ED522D7004637D1 /* XCRemoteSwiftPackageReference "swift-dependencies" */;
+			productName = Dependencies;
+		};
+		062292712ED522ED004637D1 /* SwiftDate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 062292702ED522ED004637D1 /* XCRemoteSwiftPackageReference "SwiftDate" */;
+			productName = SwiftDate;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

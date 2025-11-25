@@ -5,8 +5,11 @@
 //  Created by Harry Ng on 10/1/25.
 //
 
+import Dependencies
+import Foundation
 import SwiftUI
 import SwiftData
+import SwiftDate
 
 struct IdeaRow: View {
     @Bindable var idea: Idea
@@ -33,6 +36,8 @@ struct IdeaRow: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(2)
                 }
+
+                Text(idea.createdAt, format: .dateTime.month().day().year().hour().minute())
             }
 
             Spacer()
@@ -54,12 +59,17 @@ struct IdeaRow: View {
 }
 
 #Preview {
+    let _ = prepareDependencies {
+        $0.date.now = Date().fastMidnight
+    }
+    @Dependency(\.date.now) var now
+
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Idea.self, configurations: config)
     
-    let idea1 = Idea(title: "Build IdeaBox App", detail: "Create a native iOS app")
-    let idea2 = Idea(title: "Learn SwiftUI", detail: "Master animations", isCompleted: true)
-    
+    let idea1 = Idea(title: "Build IdeaBox App", detail: "Create a native iOS app", createdAt: now)
+    let idea2 = Idea(title: "Learn SwiftUI", detail: "Master animations", isCompleted: true, createdAt: now)
+
     container.mainContext.insert(idea1)
     container.mainContext.insert(idea2)
     
@@ -68,4 +78,10 @@ struct IdeaRow: View {
         IdeaRow(idea: idea2)
     }
     .modelContainer(container)
+}
+
+extension Date {
+    var fastMidnight: Date {
+        Calendar.current.startOfDay(for: self)
+    }
 }
