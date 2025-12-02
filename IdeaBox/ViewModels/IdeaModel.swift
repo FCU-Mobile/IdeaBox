@@ -15,17 +15,17 @@ class IdeaModel {
     // MARK: - Intents
     
     func addIdea(title: String, description: String) {
-        let newIdea = Idea(title: title, description: description)
-        ideas.insert(newIdea, at: 0)
+//        let newIdea = Idea(title: title, description: description)
+//        ideas.insert(newIdea, at: 0)
     }
     
     func deleteIdeas(at offsets: IndexSet) {
-        ideas.remove(atOffsets: offsets)
+//        ideas.remove(atOffsets: offsets)
     }
     
     func toggleCompletion(for idea: Idea) {
-        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
-            ideas[index].isCompleted.toggle()
-        }
+//        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
+//            ideas[index].isCompleted.toggle()
+//        }
     }
 }

@@ -8,26 +8,26 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var model = IdeaModel()
+    @State private var ideas = Idea.mockIdeas
     @State private var showingAddIdea = false
 
     var body: some View {
         TabView {
             Tab("All", systemImage: "list.bullet") {
-                AllIdeasView(model: model, showingAddIdea: $showingAddIdea)
+                AllIdeasView(ideas: $ideas, showingAddIdea: $showingAddIdea)
             }
 
             Tab("Completed", systemImage: "checkmark.circle.fill") {
-                CompletedIdeasView(model: model)
+                CompletedIdeasView(ideas: $ideas)
             }
 
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
-                SearchView(model: model)
+                SearchView(ideas: $ideas)
             }
         }
         .sheet(isPresented: $showingAddIdea) {
             AddIdeaSheet { newIdea in
-                model.addIdea(title: newIdea.title, description: newIdea.description)
+                ideas.insert(newIdea, at: 0)
             }
         }
     }

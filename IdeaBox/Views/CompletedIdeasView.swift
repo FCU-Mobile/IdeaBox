@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct CompletedIdeasView: View {
-    var model: IdeaModel
+    @Binding var ideas: [Idea]
 
     var completedIdeas: [Idea] {
-        model.ideas.filter { $0.isCompleted }
+        ideas.filter { $0.isCompleted }
     }
 
     var body: some View {
@@ -27,20 +27,31 @@ struct CompletedIdeasView: View {
                     List {
                         ForEach(completedIdeas) { idea in
                             IdeaRow(idea: idea) {
-                                model.toggleCompletion(for: idea)
+                                toggleCompletion(for: idea)
                             }
                         }
-                        .onDelete(perform: model.deleteIdeas)
+                        .onDelete(perform: deleteIdeas)
                     }
                 }
             }
             .navigationTitle("Completed")
         }
     }
+
+    private func toggleCompletion(for idea: Idea) {
+        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
+            ideas[index].isCompleted.toggle()
+        }
+    }
+
+    private func deleteIdeas(at offsets: IndexSet) {
+        let idsToDelete = offsets.map { completedIdeas[$0].id }
+        ideas.removeAll { idea in idsToDelete.contains(idea.id) }
+    }
 }
 
 #Preview {
-    @Previewable @State var model = IdeaModel()
+    @Previewable @State var ideas = Idea.mockIdeas
 
-    CompletedIdeasView(model: model)
+    CompletedIdeasView(ideas: $ideas)
 }
