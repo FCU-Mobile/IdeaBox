@@ -24,6 +24,10 @@ struct ContentView: View {
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
                 SearchView(model: model)
             }
+
+            Tab("Notifications", systemImage: "bell") {
+                NotificationDemoView()
+            }
         }
         .sheet(isPresented: $showingAddIdea) {
             AddIdeaSheet { newIdea in
