@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct AllIdeasView: View {
-    @Binding var ideas: [Idea]
+    var model: IdeaModel
     @Binding var showingAddIdea: Bool
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(ideas) { idea in
+                ForEach(model.ideas) { idea in
                     IdeaRow(idea: idea) {
-                        toggleCompletion(for: idea)
+                        model.toggleCompletion(for: idea)
                     }
                 }
-                .onDelete(perform: deleteIdeas)
+                .onDelete(perform: model.deleteIdeas)
             }
             .navigationTitle("All Ideas")
             .toolbar {
@@ -31,21 +31,11 @@ struct AllIdeasView: View {
             }
         }
     }
-
-    private func toggleCompletion(for idea: Idea) {
-        if let index = ideas.firstIndex(where: { $0.id == idea.id }) {
-            ideas[index].isCompleted.toggle()
-        }
-    }
-
-    private func deleteIdeas(at offsets: IndexSet) {
-        ideas.remove(atOffsets: offsets)
-    }
 }
 
 #Preview {
-    @Previewable @State var ideas = Idea.mockIdeas
+    @Previewable @State var model = IdeaModel()
     @Previewable @State var showingAdd = false
 
-    AllIdeasView(ideas: $ideas, showingAddIdea: $showingAdd)
+    AllIdeasView(model: model, showingAddIdea: $showingAdd)
 }
