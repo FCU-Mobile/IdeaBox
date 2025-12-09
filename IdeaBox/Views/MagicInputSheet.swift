@@ -82,7 +82,8 @@ struct MagicInputSheet: View {
         
         Task {
             do {
-                // TODO: 生成點子
+                generatedIdeas = try await IdeaGenerator.shared.generateIdeas(from: briefIdeas)
+                    .map { Idea(title: $0.title, description: $0.description) }
                 showingGeneratedIdeas = true
             } catch {
                 errorMessage = error.localizedDescription
