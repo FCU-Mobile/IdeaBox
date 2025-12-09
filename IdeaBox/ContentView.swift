@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.scenePhase) private var ScenePhase
     @State private var model = IdeaModel()
     @State private var showingAddIdea = false
 
@@ -20,6 +21,10 @@ struct ContentView: View {
             Tab("Completed", systemImage: "checkmark.circle.fill") {
                 CompletedIdeasView(model: model)
             }
+            
+            Tab("Notification", systemImage: "bell") {
+                NotificationDemoView()
+            }
 
             Tab("Search", systemImage: "magnifyingglass", role: .search) {
                 SearchView(model: model)
@@ -28,6 +33,11 @@ struct ContentView: View {
         .sheet(isPresented: $showingAddIdea) {
             AddIdeaSheet { newIdea in
                 model.addIdea(title: newIdea.title, description: newIdea.description)
+            }
+        }
+        .onChange(of: ScenePhase) { phase in
+            if phase == .active {
+                UNUserNotificationCenter.current().setBadgeCount(8)
             }
         }
     }
