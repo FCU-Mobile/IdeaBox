@@ -10,6 +10,7 @@ import SwiftUI
 struct AllIdeasView: View {
     var model: IdeaModel
     @Binding var showingAddIdea: Bool
+    @State private var showingMagicInput = false
 
     var body: some View {
         NavigationStack {
@@ -24,10 +25,22 @@ struct AllIdeasView: View {
             .navigationTitle("All Ideas")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
+                    Button(action: { showingMagicInput = true }) {
+                        Image(systemName: "sparkles")
+                    }
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
                     Button(action: { showingAddIdea = true }) {
                         Image(systemName: "plus")
                     }
                 }
+            }
+            .sheet(isPresented: $showingMagicInput) {
+                MagicInputSheet { newIdeas in
+                    model.addIdeas(newIdeas)
+                }
+                .presentationDetents([.medium])
             }
         }
     }

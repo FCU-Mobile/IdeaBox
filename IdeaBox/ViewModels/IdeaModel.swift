@@ -19,6 +19,10 @@ class IdeaModel {
         ideas.insert(newIdea, at: 0)
     }
     
+    func addIdeas(_ newIdeas: [Idea]) {
+        ideas.insert(contentsOf: newIdeas, at: 0)
+    }
+    
     func deleteIdeas(at offsets: IndexSet) {
         ideas.remove(atOffsets: offsets)
     }
